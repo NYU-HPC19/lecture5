@@ -1,0 +1,11 @@
+
+# first rule is default
+omp-test: omp-test.cpp
+	g++ -std=c++11 -fopenmp omp-test.cpp -o omp-test
+
+clean:
+	-rm -f omp-test
+
+# tell 'make' that clean is not a file
+.PHONY: clean
+
