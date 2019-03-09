@@ -8,14 +8,17 @@ else
 CXXFLAGS += -fopenmp # for GCC
 endif
 
-TARGETS = $(basename $(wildcard *.cpp))
+TARGETS = $(basename $(wildcard *.cpp)) $(basename $(wildcard *.c))
 
 # default first rule
 all : $(TARGETS)
 
 # match all targets % such that there is a source file %.cpp
 # Automatic variables: $< (first dependency), $^ (dependency list), $@ (target)
-%:%.cpp # *.h
+%:%.cpp *.h
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+%:%.c *.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 clean:
